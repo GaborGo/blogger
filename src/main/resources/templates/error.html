@@ -1,0 +1,36 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head
+        th:insert="fragments.html :: headerfiles">
+    <![endif]-->
+</head>
+<body>
+<header th:insert="fragments.html :: nav"></header>
+
+<div class="container ">
+    <div class="row">
+    <article class="col-md-6">
+        <header>
+            <h1 class="display-2" th:text="${error}">Ez itt a gond</h1>
+        </header>
+
+        <section >
+            <p class="display-4" th:text="${message}">Ez az üzenet.</p>
+        </section>
+        <section >
+            <p class="display-4" th:text="${timestamp}">Timestamp</p>
+        </section>
+        <section >
+            <p class="display-4" th:text="'Error'+${path}">Ez az üzenet.</p>
+        </section>
+    </article>
+
+<img src="images/john.gif"  class="col-md-6" alt="John?">
+    </div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" ></script>
+</body>
+</html>

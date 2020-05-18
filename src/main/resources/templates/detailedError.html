@@ -1,0 +1,57 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head
+        th:insert="fragments.html :: headerfiles">
+    <![endif]-->
+</head>
+<body>
+<header th:insert="fragments.html :: nav"></header>
+
+<div class="container">
+
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed"
+                        data-toggle="collapse" data-target="#bs-example-navbar-collapse-5" aria-expanded="false">
+                    <span class="sr-only"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">napiSFJ.com</a>
+            </div>
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-5">
+                <p class="navbar-text navbar-right" th:text="#{yourip}">IP címed: <a href="#" class="navbar-link">127.0.0.1</a></p>
+            </div>
+        </div>
+    </nav>
+
+   
+    <article>
+        <header>
+            <h1 th:text="${error}">Ez itt a gond</h1> 
+        </header>
+    
+ 	    <section >
+            <p th:text="${message}">Ez az üzenet.</p>
+            <p th:text="${path}">Elérési út.</p>
+            <p th:text="${status}">Státusz</p>
+            <p th:text="${timestamp}">Időpont</p>
+        </section>
+        
+       
+      
+    </article>
+
+    <footer>
+        <p th:text="#{footerText}">Készült az San Franciscoból Jöttem csapata megbízásából</p>
+    </footer>
+
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" ></script>
+</body>
+</html>

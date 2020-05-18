@@ -1,0 +1,117 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head
+        th:insert="fragments.html :: headerfiles">
+    <![endif]-->
+</head>
+<body>
+<header th:insert="fragments.html :: nav"></header><br>
+<div class="container">
+    <div class="jumbotron">
+
+        <br>
+        <br>
+
+        <form th:action="@{/admin/search}">
+            <div class="card mb-auto">
+                <div class="card-header">
+                    <h4>Filter</h4>
+                </div>
+                <div class="card-body">
+                    <div class="form-group row">
+                        <label for="field" class="col-sm-4 col-form-label">Search by</label>
+                        <select class="form-control col-sm-8" id="field" name="field">
+                            <option th:selected="${field == 'user'}" value="user">User</option>
+                            <option th:selected="${field == 'title'}" value="title">Title</option>
+                            <option th:selected="${field == 'content'}" value="content">Content</option>
+
+                        </select>
+                    </div>
+                    <div class="form-group row">
+                        <label for="query" class="col col-sm-4">Your search query</label>
+                        <input id="query" class="form-control col-sm-8" placeholder="<empty>" th:name="query" th:value="${query}" type="text" minlength="4"/>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col col-sm-4"></div>
+                        <input class="btn btn-primary col col-sm-8" type="submit" value="Submit">
+                    </div>
+                </div>
+            </div>
+        </form>
+<br>
+<h1>Results</h1>
+        <table class="table-hover .thead-dark table-striped" style="width: 100%;" th:object="${stories}">
+            <tr>
+                <th style="height:50px;">Title</th>
+                <th>Author</th>
+                <th>Read more</th>
+                <th>Action</th>
+
+            </tr>
+            <tr th:each="story : ${results}">
+                <td th:text="${story.title}"></td>
+                <td th:text="${story.user.username}"></td>
+                <td><td> <a th:href="@{'/title/id/'+ ${story.id}}" >Read more</a></td></td>
+                <td>
+                    <a href="#" th:href="@{'/admin/delete/' + ${story.id}}">Delete Story</a>
+                </td>
+            </tr>
+        </table>
+        <br>
+        <div th:if="${blockUser}" class="alert-success alert" role="alert">
+            <p th:text="${blockUser}"></p>
+        </div>
+        <br>
+
+        <h1>All users</h1>
+        <table class="table-hover .thead-dark table-striped" style="width: 100%;" th:object="${bloggers}">
+            <tr>
+                <th style="height:50px;">Username</th>
+                <th>Active</th>
+                <th>Action</th>
+            </tr>
+            <tr th:each="blogger : ${bloggers}">
+                <td th:text="${blogger.username}"></td>
+                <td th:text="${blogger.isEnabled()}"></td>
+                <td>
+                    <div th:if="${blogger.isEnabled()}">
+                        <a href="#" th:href="@{'/admin/blockUser/' + ${blogger.id}}">Block user</a>
+                    </div>
+                    <div th:unless="${blogger.isEnabled()}">
+                        <a href="#" th:href="@{'/admin/blockUser/' + ${blogger.id}}">deBlock user</a>
+                    </div>
+                </td>
+            </tr>
+        </table>
+        <br>
+        <br>
+        <div th:if="${deleteSuccess}" class="alert-success alert" role="alert">
+            <p th:text="${deleteSuccess}"></p>
+        </div>
+<h1>All entries:</h1>
+    <table class="table-hover .thead-dark table-striped" style="width: 100%;" th:object="${stories}">
+        <tr>
+            <th style="height:50px;">Title</th>
+            <th>Author</th>
+            <th>Read more</th>
+            <th>Action</th>
+
+        </tr>
+        <tr th:each="story : ${stories}">
+            <td th:text="${story.title}"></td>
+            <td th:text="${story.user.username}"></td>
+            <td> <a th:href="@{'/title/id/'+ ${story.id}}" >Read more</a></td>
+            <td>
+                <a href="#" th:href="@{'/admin/delete/' + ${story.id}}">Delete Story</a>
+            </td>
+        </tr>
+    </table>
+        <br>
+        <div th:if="${blockUser}" class="alert-success alert" role="alert">
+            <p th:text="${blockUser}"></p>
+        </div>
+</div>
+</div>
+</body>
+</html>

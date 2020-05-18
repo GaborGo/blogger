@@ -1,0 +1,23 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head
+        th:insert="fragments.html :: headerfiles">
+    <![endif]-->
+</head>
+<body>
+<header th:insert="fragments.html :: nav"></header>
+<div class="container">
+    <div class="jumbotron">
+    <div class="form-group">
+        <form class="form-group" action="#" method="post" th:action="@{/blogger/newBlogEntry}" th:object="${blogEntry}">
+            <input type="text" class="form-control form-control-lg col-sm-4" placeholder="Title" th:field="*{title}" /><br>
+            <textarea class="form-control" type="text" placeholder="Content" th:field="*{content}" /><br>
+            <input type="submit" value="Submit" class="btn btn-primary btn-lg"  />
+        </form>
+    </div><br>
+    </div>
+
+</div>
+</body>
+</html>

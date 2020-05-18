@@ -1,0 +1,8 @@
+
+insert into Blogger (age,name) VALUES (21, 'Gyula');
+insert into Blogger (age,name) VALUES (26, 'Krisz');
+insert into Blog_Entry (title,content,posted,blogger_id) values ('Teszt cím','Teszt tartalom', '2013-01-11', (select id FROM Blogger where name = 'Gyula') );
+insert into Blog_Entry (title,content,posted,blogger_id) values ('Teszt2 cím','Teszt2 tartalom2', '2012-01-11', (select id FROM Blogger where name = 'Gyula') );
+insert into Blog_Entry (title,content,posted,blogger_id) values ('Krisz cím','Krisz tartalom', '2011-01-11', (select id FROM Blogger where name = 'Krisz') );
+insert into Blog_Entry (title,content,posted,blogger_id) values ('Krisz2 cím','Krisz2 tartalom2', CURRENT_DATE(), (select id FROM Blogger where name = 'Krisz') );
+insert into Blog_Entry (title,content,posted,blogger_id) values ('szia','Szia tartalom2', '2010-01-11', (select id FROM Blogger where name = 'Krisz') );

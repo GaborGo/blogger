@@ -1,0 +1,38 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head
+        th:insert="fragments.html :: headerfiles">
+    <![endif]-->
+</head>
+<body>
+<header th:insert="fragments.html :: nav"></header>
+
+<div class="container">
+    <div class="card bg-light mb-3" style="width: 100%;" th:object="${blogEntry}">
+        <div class="card-body">
+            <h5 class="card-title " th:text="${blogEntry.title}" >Card title</h5>
+            <h6 class="card-subtitle mb-2 text-muted" th:text="'by ' + ${blogEntry.user.username}+ ', on ' + ${#dates.format(blogEntry.posted, 'dd-MMM-yyyy HH:MM')}" >Card subtitle</h6>
+            <p class="card-text" th:utext="${blogEntry.content}"></p>
+            <a th:href="@{'/blogs/'+${blogEntry.user.username}}" th:text="'    More from ' + ${blogEntry.user.username}"></a>
+            <a sec:authorize="hasAuthority('ROLE_ADMIN')" th:href="'/admin/delete/'+${blogEntry.id}"><button class="btn-danger">Delete</button> </a>
+        </div>
+    </div>
+        <footer>
+            <address>
+                Created: <span th:text="${blogEntry.user.username}">Anonymous</span>
+            </address>
+        </footer>
+        <hr/>
+    </article>
+
+    <footer>
+        <p th:text="#{footerText}">Blogger! 2020</p>
+    </footer>
+
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" ></script>
+</body>
+</html>

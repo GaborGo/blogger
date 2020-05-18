@@ -1,0 +1,24 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head
+        th:insert="fragments.html :: headerfiles">
+    <![endif]-->
+</head>
+<body>
+<header th:insert="fragments.html :: nav"></header>
+
+<div class="container">
+    <div class="jumbotron">
+    <form name="registration" th:action="@{/reg}" th:object="${user}" method="post" class="form-signin">
+        <h2 class="form-signin-heading">Please register</h2>
+        <input type="text" id="username" name="username" th:field="*{username}" class="form-control" placeholder="Username"  minlength="6"/>
+        <input type="password" id="password" name="password" th:field="*{password}"  class="form-control" placeholder="Password" minlength="6"/>
+        <input type="email" id="email" name="email" th:field="*{email}" class="form-control" placeholder="email" minlength="6">
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Registration</button>
+    </form>
+
+    </div>
+</div>
+</body>
+</html>

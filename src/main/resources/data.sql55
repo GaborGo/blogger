@@ -1,0 +1,6 @@
+
+insert into Blogger (id,name, password, roles) VALUES (1,'user','$2a$10$0TJjb8wxITEozVQFKHo0we1otDuIgyiUPgN4aUXBtI3ESKmrMhQ9e', 'USER');
+insert into Blogger (id,name, password, roles) VALUES (2,'admin','$2y$12$M4Wz2L.Mn8N8oH7g/2UX5eTZF5xWHxBmXCQ1gNiC1H.wEj3Zu2BSa', 'ADMIN');
+insert into Blog_Entry (id,title,content,posted,blogger_id) values (1,'Teszt cím','Teszt tartalom', '2020-02-20', (select id FROM Blogger where name = 'user') );
+insert into Blog_Entry (id,title,content,posted,blogger_id) values (2,'Teszt cím','Teszt tartalom', '2020-02-20', (select id FROM Blogger where name = 'admin') );
+

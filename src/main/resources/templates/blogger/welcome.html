@@ -1,0 +1,64 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head
+        th:insert="fragments.html :: headerfiles">
+    <![endif]-->
+</head>
+<body>
+<header th:insert="fragments.html :: nav"></header>
+<div class="container">
+    <div class="jumbotron">
+    <div th:if="${deleteSuccess}" class="alert-success alert" role="alert">
+        <p th:text="${deleteSuccess}"></p>
+    </div>
+        <div th:if="${updateSuccess}" class="alert-success alert" role="alert">
+            <p th:text="${updateSuccess}"></p>
+        </div>
+
+    <div th:object="${blogger}">
+<h1 th:text="'Welcome '+ ${blogger.username}"> Welcome  </h1><br></div>
+      <h3>Your last blog entries:</h3><br>
+    <button class="btn-primary btn-lg" th:onclick="|location.href = '@{/blogger/newBlogEntry}'|" th:href="@{~/newBlogEntry}" >Add story</button><br><br>
+
+    <div class="card bg-light mb-3" style="width: 100%;" th:each="entry : ${blogger.stories}">
+        <div class="card-body">
+            <h5 class="card-title " th:text="${entry.title}" >Card title</h5>
+            <h6 class="card-subtitle mb-2 text-muted" th:text="${entry.user.username}+', on ' + ${#dates.format(entry.posted, 'dd-MMM-yyyy HH:MM')}" >Card subtitle</h6>
+            <p class="card-text" th:utext="${entry.content}" style="white-space: nowrap;text-overflow: ellipsis;overflow: hidden;">
+                Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <a th:href="@{'/title/id/'+ ${entry.id}}" >Read more  </a>
+            <a href="#" th:href="@{'delete/' + ${entry.id}}"><button class="btn-danger btn-lg" value="Delete">Delete</button></a>
+            <a href="#" th:href="@{'edit/'+${entry.id}}"><button class="btn-info btn-lg" value="Edit story">Edit</button> </a>
+        </div>
+    </div>
+    </div>
+<!--    <button class="btn-primary btn-lg" th:onclick="|location.href = '@{/blogger/newBlogEntry}'|" th:href="@{~/newBlogEntry}" >Add story</button><br>-->
+<!--    <span th:if="${blogger.stories!=null}">-->
+<!--        <article th:each="entry : ${blogger.stories}">-->
+<!--            <a th:href="@{/blogEntry}" >-->
+<!--                <header>-->
+<!--                    <h1 th:text="${entry.title}" >Ez itt a cím</h1>-->
+<!--                    <p th:text="${#dates.format(entry.posted, 'yyyy.MM.dd HH:mm')}">Posted on September 31, 2015 at 10:00 PM</p>-->
+<!--                     <a href="#" th:href="@{'delete/' + ${entry.id}}"><button class="btn-danger btn-lg" value="Delete">Delete</button></a>-->
+<!--                </header>-->
+<!--            </a>-->
+<!--            <section th:utext="${entry.content}">-->
+<!--                <p>Carl összeráncolta szemöldökét, és felnézett az égre. Bármennyire is erőlködött, nem tudott egyetlen másodpercnél tovább a nap felé nézni. Az égitest vakító ereje bevilágította a környéket, emellett pedig szúrós meleg pontként szurkálta halántékát mind a két oldalról.</p>-->
+<!--                <p> -Feladom… - gondolta, majd tekintetét a játszótérre emelte. Innen a nyolcadik emeletről tökéletesen be lehetett látni az egész grundot. A háztömbök által körülölelt focipályán a gyerekek nyüzsögtek reggeltől estig. Ha az egyiket elhívták a szülei, szinte azonnal jött a helyére egy másik. A hajnalban még négy fős csapatok délutánra nyolc tagúra dagadtak, naplemente előtt pedig már nem is lehetett pontosan megállapítani, hogy melyik térfelen hány gyerek szaladgál fel-alá.</p>-->
+<!--                <p></p>-->
+<!--            </section>-->
+
+<!--            <footer>-->
+<!--                <address>-->
+<!--                    Author: <span th:text="${entry.user.username}">Anonymous</span>-->
+<!--                </address>-->
+<!--            </footer>-->
+<!--            <hr/>-->
+<!--        </article>-->
+<!--</span>-->
+    <span th:unless="${blogger.stories!=null}">No stories yet</span>
+
+</div>
+</body>
+</html>
